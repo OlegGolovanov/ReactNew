@@ -107,9 +107,7 @@ class App extends Component {
                     />                        
                 </div>
                 <EmployersList 
-                data = {
-                    []? visibleEmp : visibleFilterWroker
-                }
+                data = {visibleEmp}
                 onDelete = {this.onDelete}
                 toggleProp = {this.toggleProp}
                 toggleStars = {this.toggleStars}
