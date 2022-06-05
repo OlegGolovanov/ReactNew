@@ -11,11 +11,21 @@ const EmployersListItem = (props) => {
             (increase ? "increase" : " ") + " " +
             (stars ? "like" : " ")
             }>
-                <span onClick={toggleProp} className="list-group-item-label" data-prop="increase">{name}</span>
-                <input type="text" className="list-group-item-input" defaultValue={salary + "$"}/>
+                <span 
+                onClick={toggleProp} 
+                className="list-group-item-label" 
+                data-prop="increase">{name}
+                </span>
+                <input 
+                type="text" 
+                className="list-group-item-input" 
+                defaultValue={salary + "$"}/>
                 <div className='d-flex justify-content-center align-items-center'>
-                    <button onClick={toggleProp} data-prop="stars" type="button"
-                        className="btn-cookie btn-sm ">
+                    <button 
+                    onClick={toggleProp} 
+                    data-prop="stars" 
+                    type="button"
+                    className="btn-cookie btn-sm ">
                         <i className="fas fa-cookie"></i>
                     </button>
                     <button type="button"

@@ -20,7 +20,7 @@ class AppFilter extends Component {
                 e.target.classList.add("btn-light");
                 e.target.classList.remove("btn-outline-light");
             }
-            this.props.filterWroker(filter);
+            this.props.addFilter(filter);
 
             
         

@@ -17,54 +17,86 @@ class App extends Component {
                     {name: "Nadeshda Golovkina", salary: "1200", increase: false, stars: false, id: 3}
                 ],
                 term: "",
-                filter: false
+                filter: " ",
         }
         this.id = 4
     }  
     
+    // 1. Удаление объектов из состояния data.
+    // Кидаем сначало в employers-list, в котором вытаскиваем id,
+    // затем в employers-list-item, в нем
+    // вызов метода в каждом эл. списка, 
+    // где при клике на карзинку 
     onDelete=(id)=> {
         this.setState(({data}) => ({
+            // 1.1. Создаем новое состояние data,
+            // отфильтровав предыдущее, которое не содержит
+            // id, которое получаем в событии клика                        
             data: data.filter(item=> item.id !== id)          
         }))            
     }
 
+    // 2. Добавление новых сотрудников.
+    // Кидаем напрямую в employers-add-form.
+    // Все тело метода здесь. Там только вызываем с
+    // аргументами e и newWorker - состояние в employers-add-form,
+    // в которое записываются введенные в employers-add-form данные
     addWorker = (e, newWorker) => {
         e.preventDefault(); 
+        // 2.2. Копируем состояние
         const copyState = this.state.data
         const worker = {
             name: newWorker.name,
             salary: newWorker.salary,
             increase: false,
             stars: false,
+            // 2.2. Новый id
             id: ++this.id  
         }; 
+        // 2.3. Добавляем в копию состояния новый объект
         copyState.push(worker);
         this.setState({
             data: copyState
         })
     }
 
+    // // 3. Изменение только значений increase и stars объектов в состоянии data  
+    // на true или false (цвет же меняется внутри employers-list-item, напрямую
+    // обращаясь к data к этим свойствам и если true один цвет, а наоборот - другой )
+    // Закидываем и получаем id также как в пункте 1 выше.
+    // Один метод для increase и stars, поэтому добавили аргумент prop,
+    // в который в employers-list-item записываем increase и stars
     toggleProp = (id, prop) => {
         this.setState(({data}) => ({
+            // 3.1. Создаем новое состояние по аналогии с пунктом 1 выше
             data: data.map(item => {
+                // 3.1. Если id на который кликаем совпадает с data, то
+                // извлекаем increase или stars и меняем в них 
+                // значение на противоположное
                 if (item.id === id) {
+                    // [prop] - это аргумент, в котором содержится 
+                    // increase или stars, которое получаем в employers-list-item 
                     return {...item, [prop]: !item[prop]}                 
                 }
+                // 3.2. Возвращаем новое состояние
                 return item          
             })       
         }))
     }
 
-    // Выведение общего колличества сотрудников,
+    // 4 Выведение общего колличества сотрудников,
     // у которых свойство stars не false
     sumPrize = (data) => {
+    // Получаем копию состояния, в котором не содержатся
+    // объекты со значением stars: true
         const all = data.filter(item=> {
-            return item.stars !==false
+            return item.stars == true
         })
+        // Возвращаем общее число сотрудников
         return all.length
     }
 
-    // Поиск сотрудников
+    // 5. Поиск сотрудников
     searchEmp = (data, term) => {
         // Если ничего не введено в объект
         // term, то возвращаем пустой объект
@@ -80,48 +112,46 @@ class App extends Component {
         this.setState({term:term})
     }
 
-    // Фильтр сотрудников по премии
-    filterWroker = (filter) => {
-        if(filter === "allWroker") {   
-            this.setState({
-                data: [
-                    {name: "Oleg Golovkin", salary: "800", increase: false, stars: false, id: 1},
-                    {name: "Vladimir Golovkin", salary: "900", increase: false, stars: false, id: 2},
-                    {name: "Nadeshda Golovkina", salary: "1200", increase: false, stars: false, id: 3}
-                ]
-            })  
-        }
+    // Фильтр сотрудников по премии.
+    filterWroker = (data, filter) => {        
         if(filter === "increaseWroker"  ) {
-            this.setState({
-                data: this.state.data.filter(item=> {
+            return data.filter(item=> {
                     return item.increase === true
-                }) 
-            }) 
+                    })             
         }
-        if(filter === "oneThousand") {
-            this.setState({
-                data: this.state.data.filter(item=> {
+        if(filter === "oneThousand") {            
+            return data.filter(item=> {
                     return +item.salary > 1000
-                }) 
-            })
-        }
-        
+                    })
+        }   
+        return data      
     }
+
+    addFilter = (filter) => {
+        this.setState({
+            filter: filter
+        })
+    }
+
+
     render(){ 
-        const {data, term} = this.state 
-        const visibleEmp = this.searchEmp(data, term)
-        
+        const {data, term, filter} = this.state;
+        const visibleEmp = this.filterWroker(this.searchEmp(data, term), filter)
         return (            
             <div className="app">
                 <AppInfo 
-                data = {data}
-                sumPrize = {this.sumPrize}/>
+                // Возвращают числа. ВЫзов 
+                // внизу не требуется. Т.е. вниз
+                // передаем числа, а не методы
+                // Поэтому сразу прописываем аргументы
+                dataLength = {data.length}
+                sumPrize = {this.sumPrize(data)}/>
                 <div className="search-panel">
                     <SearchPanel
                     changeTerm = {this.changeTerm}
                     />
                     <AppFilter
-                    filterWroker = {this.filterWroker}
+                    addFilter = {this.addFilter}
                     data = {data}
                     />                        
                 </div>
