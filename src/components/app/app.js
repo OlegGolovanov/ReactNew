@@ -12,11 +12,12 @@ class App extends Component {
         super(props)
         this.state = {
                 data: [
-                    {name: "Oleg Golovkin", salary: "1200", increase: false, stars: false, id: 1},
-                    {name: "Vladimir Golovkin", salary: "1300", increase: false, stars: false, id: 2},
-                    {name: "Nadeshda Golovkina", salary: "1400", increase: false, stars: false, id: 3}
+                    {name: "Oleg Golovkin", salary: "800", increase: false, stars: false, id: 1},
+                    {name: "Vladimir Golovkin", salary: "900", increase: false, stars: false, id: 2},
+                    {name: "Nadeshda Golovkina", salary: "1200", increase: false, stars: false, id: 3}
                 ],
-                term: ""
+                term: "",
+                filter: false
         }
         this.id = 4
     }  
@@ -80,18 +81,35 @@ class App extends Component {
     }
 
     // Фильтр сотрудников по премии
-    filterWroker = () => {
-        return this.state.data.filter(item=> {
-            return item.increase === true
-        })
+    filterWroker = (filter) => {
+        if(filter === "allWroker") {   
+            this.setState({
+                data: [
+                    {name: "Oleg Golovkin", salary: "800", increase: false, stars: false, id: 1},
+                    {name: "Vladimir Golovkin", salary: "900", increase: false, stars: false, id: 2},
+                    {name: "Nadeshda Golovkina", salary: "1200", increase: false, stars: false, id: 3}
+                ]
+            })  
+        }
+        if(filter === "increaseWroker"  ) {
+            this.setState({
+                data: this.state.data.filter(item=> {
+                    return item.increase === true
+                }) 
+            }) 
+        }
+        if(filter === "oneThousand") {
+            this.setState({
+                data: this.state.data.filter(item=> {
+                    return +item.salary > 1000
+                }) 
+            })
+        }
+        
     }
-
-    
-
     render(){ 
         const {data, term} = this.state 
         const visibleEmp = this.searchEmp(data, term)
-        const visibleFilterWroker = this.filterWroker
         
         return (            
             <div className="app">
@@ -104,6 +122,7 @@ class App extends Component {
                     />
                     <AppFilter
                     filterWroker = {this.filterWroker}
+                    data = {data}
                     />                        
                 </div>
                 <EmployersList 

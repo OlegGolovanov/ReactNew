@@ -7,41 +7,61 @@ class AppFilter extends Component {
         super(props)
     }
     
-    onChangeClass = (e) => {
-        document.querySelectorAll('button').forEach(item => {
-            item.classList.remove("btn-light");
-            item.classList.add("btn-outline-light");
-        });;
-        if(e.target.matches(".btn-light")) {
-            e.target.classList.add("btn-outline-light");
-            e.target.classList.remove("btn-light");
-        } else if(e.target.matches(".btn-outline-light")) {
-            e.target.classList.add("btn-light");
-            e.target.classList.remove("btn-outline-light");
-        }
-        
+    onChangeClassFilter = (e, filter) => {
+            
+            document.querySelectorAll('button').forEach(item => {
+                item.classList.remove("btn-light");
+                item.classList.add("btn-outline-light");
+            });;
+            if(e.target.matches(".btn-light")) {
+                e.target.classList.add("btn-outline-light");
+                e.target.classList.remove("btn-light");
+            } else if(e.target.matches(".btn-outline-light")) {
+                e.target.classList.add("btn-light");
+                e.target.classList.remove("btn-outline-light");
+            }
+            this.props.filterWroker(filter);
 
+            
+        
     }
+
+    
     
     render() {
         return (
             <div className="btn-group">                
                 <button 
-                    onClick={this.onChangeClass}
+                    onClick={
+                        (e) => {
+                        this.onChangeClassFilter(e, e.currentTarget.getAttribute("data-filter"))}                  
+                    }
                     className="btn btn-light" 
-                    type="button">Все сотрудники
+                    type="button"
+                    data-filter="allWroker"
+                    >Все сотрудники
                 </button>
                             
                 <button 
-                    onClick={this.onChangeClass}
+                     onClick={
+                        (e) => {
+                        this.onChangeClassFilter(e, e.currentTarget.getAttribute("data-filter"))}                  
+                    }
                     className="btn btn-outline-light" 
-                    type="button">Сотрудники на повышение
+                    type="button"
+                    data-filter="increaseWroker"
+                    >Сотрудники на повышение
                 </button>
                             
                 <button 
-                    onClick={this.onChangeClass}
+                    onClick={
+                        (e) => {
+                        this.onChangeClassFilter(e, e.currentTarget.getAttribute("data-filter"))}                  
+                    }
                     className="btn btn-outline-light" 
-                    type="button">З/п больше 1000$
+                    type="button"
+                    data-filter="oneThousand"
+                    >З/п больше 1000$
                 </button>
                 
             </div>
