@@ -103,6 +103,12 @@ class App extends Component {
         if (term.length === 0) {
             return data
         }
+        // Возвращаем копию состояния 
+        // с объектами, содержащими значения в
+        // свойстве name == term
+        // indexOf(term) возращает индекс найденной 
+        // строки
+        // если ничего не находит, то возвр. -1
         return data.filter(item=> {
             return item.name.indexOf(term) > -1
         })        
@@ -136,6 +142,14 @@ class App extends Component {
 
     render(){ 
         const {data, term, filter} = this.state;
+        // Происходит двойной фильтр. Первый аргумент в filterWroker,
+        // это уже отфильтрованное состояние в функции searchEmp (первая
+        // фильтрация). В filterWroker происходит вторая фильтрация 
+        // В обоих фильтрах состояние не меняется, а создается его копия, которая
+        // return возращается наружу к переменной visibleEmp !!
+        // Это нужно для того, чтобы фильтры применялись к первоначальному
+        // состоянию, а не к отфильтрованному. Состояние должно быть статичным,
+        // чтобы каждый из фильтров не мешал остальным
         const visibleEmp = this.filterWroker(this.searchEmp(data, term), filter)
         return (            
             <div className="app">
