@@ -17,7 +17,7 @@ class App extends Component {
                     {name: "Nadeshda Golovkina", salary: "1200", increase: false, stars: false, id: 3}
                 ],
                 term: "",
-                filter: " ",
+                filter: "allWroker",
         }
         this.id = 4
     }  
@@ -165,8 +165,8 @@ class App extends Component {
                     changeTerm = {this.changeTerm}
                     />
                     <AppFilter
+                    filter = {filter}
                     addFilter = {this.addFilter}
-                    data = {data}
                     />                        
                 </div>
                 <EmployersList 
