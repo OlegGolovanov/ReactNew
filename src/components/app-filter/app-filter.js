@@ -9,9 +9,9 @@ class AppFilter extends Component {
 
     render() {
         const btnData = [
-            {name: "allWroker"},
-            {name: "increaseWroker"},
-            {name: "oneThousand"},
+            {name: "allWroker", lable: "Все сотрудники"},
+            {name: "increaseWroker", lable: "Претендующие на повышение"},
+            {name: "oneThousand", lable: "З.п. более 1000$" },
         ]
         
         const btns = btnData.map(({name, lable})=> {

@@ -139,9 +139,13 @@ class App extends Component {
         })
     }
 
+    changeMoney = (data, salary) => {
+        // const = 
+    }
+
 
     render(){ 
-        const {data, term, filter} = this.state;
+        const {data, term, filter, salary} = this.state;
         // Происходит двойной фильтр. Первый аргумент в filterWroker,
         // это уже отфильтрованное состояние в функции searchEmp (первая
         // фильтрация). В filterWroker происходит вторая фильтрация 
