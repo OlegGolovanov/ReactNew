@@ -7,28 +7,31 @@ class AppFilter extends Component {
         super(props)
     }
 
-    render() {       
-        return (           
-            <div className="btn-group">                
-                <button                   
-                    className="btn" 
+    render() {
+        const btnData = [
+            {name: "allWroker"},
+            {name: "increaseWroker"},
+            {name: "oneThousand"},
+        ]
+        
+        const btns = btnData.map(({name, lable})=> {
+            const active = this.props.filter === name
+            const clazz = active ? "btn-light" : "btn-outline-light"
+            return( 
+                <button 
+                    onClick={() => {this.props.addFilter(name)}}
+                    className={`btn ${clazz}`} 
                     type="button"
-                    name="all"
-                    >Все
-                </button>     
-                <button
-                    className="btn" 
-                    type="button"
-                    name="inc"
-                    >повышение
+                    name={name}>
+                        {lable}
                 </button>
-                            
-                <button                   
-                    className="btn" 
-                    type="button"
-                    name="one"
-                    >1000$
-                </button>                
+            )
+        })
+
+
+        return (
+            <div className="btn-group">
+                {btns}
             </div>
         )
     }
