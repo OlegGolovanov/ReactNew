@@ -139,8 +139,16 @@ class App extends Component {
         })
     }
 
-    changeMoney = (data, salary) => {
-        // const = 
+    changeSalary = (data, salary) => {        
+        const copyData = data.map(item=>{
+            return {...item, salary: salary}
+        })
+        this.setState({data: copyData})
+    }
+
+    onSalary = (salary) => {
+        this.setState({salary})
+        console.log("dasd");
     }
 
 
@@ -178,6 +186,7 @@ class App extends Component {
                 onDelete = {this.onDelete}
                 toggleProp = {this.toggleProp}
                 toggleStars = {this.toggleStars}
+                onSalary = {() => {this.onSalary(salary)}}
                 />       
                 <EmployersAddForm 
                 onAddWorker = {(e, newWorker) => {this.addWorker(e, newWorker)}}

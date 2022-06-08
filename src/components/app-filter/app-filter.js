@@ -22,7 +22,7 @@ class AppFilter extends Component {
                     onClick={() => {this.props.addFilter(name)}}
                     className={`btn ${clazz}`} 
                     type="button"
-                    name={name}>
+                    key={name}>
                         {lable}
                 </button>
             )
