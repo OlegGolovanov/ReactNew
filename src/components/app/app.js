@@ -90,7 +90,7 @@ class App extends Component {
     // Получаем копию состояния, в котором не содержатся
     // объекты со значением stars: true
         const all = data.filter(item=> {
-            return item.stars == true
+            return item.stars === true
         })
         // Возвращаем общее число сотрудников
         return all.length
@@ -140,16 +140,16 @@ class App extends Component {
     }
 
     changeSalary = (data, salary) => {        
-        const copyData = data.map(item=>{
-            return {...item, salary: salary}
-        })
-        this.setState({data: copyData})
+            const copyData = data.map(item=>{
+                return {...item, salary: salary}
+            })
+            this.setState({data:copyData})               
     }
 
-    onSalary = (salary) => {
+    onChangeSalary = (salary) => {
         this.setState({salary})
-        console.log("dasd");
     }
+
 
 
     render(){ 
@@ -163,6 +163,8 @@ class App extends Component {
         // состоянию, а не к отфильтрованному. Состояние должно быть статичным,
         // чтобы каждый из фильтров не мешал остальным
         const visibleEmp = this.filterWroker(this.searchEmp(data, term), filter)
+        this.changeSalary(data, salary);
+
         return (            
             <div className="app">
                 <AppInfo 
@@ -186,7 +188,7 @@ class App extends Component {
                 onDelete = {this.onDelete}
                 toggleProp = {this.toggleProp}
                 toggleStars = {this.toggleStars}
-                onSalary = {() => {this.onSalary(salary)}}
+                onChangeSalary = {this.onChangeSalary}
                 />       
                 <EmployersAddForm 
                 onAddWorker = {(e, newWorker) => {this.addWorker(e, newWorker)}}

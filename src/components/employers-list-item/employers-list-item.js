@@ -5,7 +5,7 @@ import "./employers-list-item.css"
 
 const EmployersListItem = (props) => {
     
-        const {name, salary, onDelete, toggleProp, increase, stars, onSalary} = props;
+        const {name, salary, onDelete, toggleProp, increase, stars, onChangeSalary} = props;
         return(
             <li className={"list-group-item d-flex justify-content-between" + " " + 
             (increase ? "increase" : " ") + " " +
@@ -17,8 +17,7 @@ const EmployersListItem = (props) => {
                 data-prop="increase">{name}
                 </span>
                 <input 
-                onChange={(e)=> {onSalary(e.target.value)}}
-
+                onChange={(e)=>{onChangeSalary()}}
                 type="text" 
                 className="list-group-item-input" 
                 defaultValue={salary + "$"}/>
