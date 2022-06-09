@@ -11,7 +11,7 @@ const EmployersList = ({data, onDelete, toggleProp, onChangeSalary}) => {
             key = {id} {...itemProps}         
             onDelete = {()=>onDelete(id)}
             toggleProp = {(e) => toggleProp(id, e.currentTarget.getAttribute("data-prop"))}
-            onChangeSalary = {onChangeSalary}
+            onChangeSalary = {(e)=> {onChangeSalary(id, e.target.value)}}
             />
         )
     })  
@@ -22,7 +22,6 @@ const EmployersList = ({data, onDelete, toggleProp, onChangeSalary}) => {
         </ul>
     )
 };
-
 
 export default EmployersList
 

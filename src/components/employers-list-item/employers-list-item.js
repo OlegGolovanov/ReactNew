@@ -17,7 +17,7 @@ const EmployersListItem = (props) => {
                 data-prop="increase">{name}
                 </span>
                 <input 
-                onChange={(e)=>{onChangeSalary()}}
+                onChange={onChangeSalary}
                 type="text" 
                 className="list-group-item-input" 
                 defaultValue={salary + "$"}/>

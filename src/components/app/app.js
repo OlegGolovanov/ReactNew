@@ -139,21 +139,18 @@ class App extends Component {
         })
     }
 
-    changeSalary = (data, salary) => {        
-            const copyData = data.map(item=>{
-                return {...item, salary: salary}
+    onChangeSalary = (id, salary) => {        
+            const copyData = this.state.data.map(item=>{
+                if(item.id === id) {
+                    return {...item, salary: salary}
+                } 
+                    return item
+                
             })
             this.setState({data:copyData})               
     }
-
-    onChangeSalary = (salary) => {
-        this.setState({salary})
-    }
-
-
-
     render(){ 
-        const {data, term, filter, salary} = this.state;
+        const {data, term, filter} = this.state;
         // Происходит двойной фильтр. Первый аргумент в filterWroker,
         // это уже отфильтрованное состояние в функции searchEmp (первая
         // фильтрация). В filterWroker происходит вторая фильтрация 
@@ -163,7 +160,6 @@ class App extends Component {
         // состоянию, а не к отфильтрованному. Состояние должно быть статичным,
         // чтобы каждый из фильтров не мешал остальным
         const visibleEmp = this.filterWroker(this.searchEmp(data, term), filter)
-        this.changeSalary(data, salary);
 
         return (            
             <div className="app">
