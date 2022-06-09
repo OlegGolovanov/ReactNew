@@ -1,6 +1,6 @@
 
 import React from "react"
-import "./employers-list-item.css"
+import "./employers-list-item.sass"
 
 
 const EmployersListItem = (props) => {
@@ -13,6 +13,7 @@ const EmployersListItem = (props) => {
             }>
                 <span 
                 onClick={toggleProp}
+                
                 className="list-group-item-label" 
                 data-prop="increase">{name}
                 </span>
