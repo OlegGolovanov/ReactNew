@@ -8,9 +8,8 @@ import EmployersList from "../employers-list/employers-list"
 import EmployersAddForm from "../employers-add-form/employers-add-form"
 
 class App extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
+    
+        state = {
                 data: [
                     {name: "Oleg Golovkin", salary: "800", increase: false, stars: false, id: 1},
                     {name: "Vladimir Golovkin", salary: "900", increase: false, stars: false, id: 2},
@@ -19,8 +18,8 @@ class App extends Component {
                 term: "",
                 filter: "allWroker",
         }
-        this.id = 4
-    }  
+        id = 4
+      
     
     // 1. Удаление объектов из состояния data.
     // Кидаем сначало в employers-list, в котором вытаскиваем id,

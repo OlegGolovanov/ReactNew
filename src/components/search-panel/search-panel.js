@@ -4,12 +4,11 @@ import "./search-panel.css"
 
 
 class SearchPanel extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+    
+        state = {
             term: ""
         }
-    }   
+    
 
     changeTerm = (e) => {
         let term = e.target.value
