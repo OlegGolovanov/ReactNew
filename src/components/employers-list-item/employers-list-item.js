@@ -6,11 +6,21 @@ import "./employers-list-item.sass"
 const EmployersListItem = (props) => {
     
         const {name, salary, onDelete, toggleProp, increase, stars, onChangeSalary} = props;
+
+        
+        
+        let className = "list-group-item d-flex justify-content-between";
+        
+        if (increase) {
+            className += ` increase`
+        }
+        if (stars) {
+            className += ` like`
+        }
+
+        
         return(
-            <li className={"list-group-item d-flex justify-content-between" + " " + 
-            (increase ? "increase" : " ") + " " +
-            (stars ? "like" : " ")
-            }>
+            <li className={className}>
                 <span 
                 onClick={toggleProp}
                 
