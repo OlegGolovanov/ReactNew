@@ -12,7 +12,7 @@ class EmployersAddForm extends React.Component {
         }
     }
 
-    onNewWorker = (e) => {
+    static onNewWorker = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
