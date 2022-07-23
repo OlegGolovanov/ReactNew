@@ -150,23 +150,7 @@ class App extends Component {
     }
 
     
-    render(){ 
-        const Component = (props) => {
-            return(
-                <div>
-                    {
-                       React.Children.map(props.children, item => {
-                        return React.cloneElement(item, {className: "shadow"})
-                       }) 
-                    }
-                </div>
-            )
-        }
-
-        
-        
-
-
+    render(){
         const {data, term, filter} = this.state;
         // Происходит двойной фильтр. Первый аргумент в filterWroker,
         // это уже отфильтрованное состояние в функции searchEmp (первая
@@ -205,13 +189,7 @@ class App extends Component {
                 />       
                 <EmployersAddForm 
                 onAddWorker = {(e, newWorker) => {this.addWorker(e, newWorker)}}
-                />
-
-                <Component>
-                    <h2>Олег</h2>
-                    <h2>Мама</h2>
-                    <h2>Папа</h2>
-                </Component>       
+                />                    
             </div>
         );
     }
